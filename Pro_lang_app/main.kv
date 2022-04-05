@@ -1,0 +1,219 @@
+WindowManager:
+  MainScreen:
+  SecondScreen:
+  ErrorScreen:
+  PythonScreen:
+  PerlScreen:
+  PHPScreen:
+  SQLScreen:
+  HTMLScreen:
+  CSSScreen:
+
+<MainScreen>:
+  name: "main_screen"
+  GridLayout:
+    cols: 1
+    rows: 5
+    padding: 5
+    Image:
+      source: "img/logo.png"
+    Label:
+      text: 'LEARN CODING'
+      font_size: 22
+    Label:
+      text:'Please Enter The Password'
+      size_hint: (0.1,0.3)
+    TextInput:
+      id: password
+      hint_text:'Correct Password: admin'
+      multiline: False
+      size_hint: (0.1,0.3)
+      password: True
+    Button:
+      text:'Login'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "second_screen" if password.text == "admin" else "error_screen"
+        root.manager.transition.direction = "up"
+
+<SecondScreen>:
+  name: "second_screen"
+  GridLayout:
+    cols: 1
+    padding: 5
+    Image:
+      source: "img/logo2.png"
+    Label:
+      text:'Welcome Programmers'
+      font_size: 22
+    GridLayout:
+      cols: 2
+      rows: 3
+      Button:
+        text:'Python'
+        size_hint: (0.1, 0.3)
+        on_release:
+          app.root.current = "python_screen"
+          root.manager.transition.direction = "right"
+      Button:
+        text:'Perl'
+        size_hint: (0.1, 0.3)
+        on_release:
+          app.root.current = "perl_screen"
+          root.manager.transition.direction = "left"
+      Button:
+        text:'PHP'
+        size_hint: (0.1, 0.3)
+        on_release:
+          app.root.current = "php_screen"
+          root.manager.transition.direction = "right"
+      Button:
+        text:'SQL'
+        size_hint: (0.1, 0.3)
+        on_release:
+          app.root.current = "sql_screen"
+          root.manager.transition.direction = "left"
+      Button:
+        text:'HTML5'
+        size_hint: (0.1, 0.3)
+        on_release:
+          app.root.current = "html_screen"
+          root.manager.transition.direction = "right"
+      Button:
+        text:'CSS3'
+        size_hint: (0.1, 0.3)
+        on_release:
+          app.root.current = "css_screen"
+          root.manager.transition.direction = "left"
+    Button:
+      text: 'Go Back'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "main_screen"
+        root.manager.transition.direction = "down"
+
+<ErrorScreen>:
+  name: 'error_screen'
+  GridLayout:
+    cols: 1
+    rows: 3
+    padding: 5
+    Image:
+      source: "img/error.png"
+    Label:
+      text:'Encorrect Password'
+      font_size: 22
+    Button:
+      text: 'Try Again'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "main_screen"
+        root.manager.transition.direction = "down"
+
+<PythonScreen>:
+  name: "python_screen"
+  GridLayout:
+    cols: 1
+    rows: 3
+    padding: 5
+    Image:
+      source: "img/python.png"
+    Label:
+      text:'LEARN PYTHON'
+      font_size: 22
+    Button:
+      text: 'Back'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "second_screen"
+        root.manager.transition.direction = "left"
+
+<PerlScreen>:
+  name: "perl_screen"
+  GridLayout:
+    cols: 1
+    rows: 3
+    padding: 5
+    Image:
+      source: "img/perl.png"
+    Label:
+      text:'LEARN PERL'
+      font_size: 22
+    Button:
+      text: 'Back'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "second_screen"
+        root.manager.transition.direction = "right"
+
+<PHPScreen>:
+  name: "php_screen"
+  GridLayout:
+    cols: 1
+    rows: 3
+    padding: 5
+    Image:
+      source: "img/php.png"
+    Label:
+      text:'LEARN PHP'
+      font_size: 22
+    Button:
+      text: 'Back'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "second_screen"
+        root.manager.transition.direction = "left"
+
+<SQLScreen>:
+  name: "sql_screen"
+  GridLayout:
+    cols: 1
+    rows: 3
+    padding: 5
+    Image:
+      source: "img/sql.png"
+    Label:
+      text:'LEARN SQL'
+      font_size: 22
+    Button:
+      text: 'Back'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "second_screen"
+        root.manager.transition.direction = "right"
+
+<HTMLScreen>:
+  name: "html_screen"
+  GridLayout:
+    cols: 1
+    rows: 3
+    padding: 5
+    Image:
+      source: "img/html.png"
+    Label:
+      text:'LEARN HTML5'
+      font_size: 22
+    Button:
+      text: 'Back'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "second_screen"
+        root.manager.transition.direction = "left"
+
+<CSSScreen>:
+  name: "css_screen"
+  GridLayout:
+    cols: 1
+    rows: 3
+    padding: 5
+    Image:
+      source: "img/css.png"
+    Label:
+      text:'LEARN CSS3'
+      font_size: 22
+    Button:
+      text: 'Back'
+      size_hint: (0.1, 0.3)
+      on_release:
+        app.root.current = "second_screen"
+        root.manager.transition.direction = "right"

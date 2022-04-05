@@ -1,0 +1,31 @@
+BoxLayout:
+  orientation: 'vertical'
+  BoxLayout:
+    orientation: 'vertical'
+    padding: 5
+    Label:
+      text:'Register'
+      font_size: 40
+    Label:
+      text:'Username'
+    TextInput:
+      hint_text: "Enter your username"
+      multiline: False
+    Label:
+      text:'Password'
+    TextInput:
+      hint_text: "Enter your password"
+      multiline: False
+      password: True
+    BoxLayout:
+      orientation:'horizontal'
+      padding: (0, 5, 0, 0)
+      Button:
+        text:'Login'
+      Button:
+        text:'Sign up'
+  BoxLayout:
+    orientation:'horizontal'
+    size_hint: (1, 0.6)
+    Label:
+      text:'M074MED@2022'

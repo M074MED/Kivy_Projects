@@ -1,0 +1,585 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+<WindowManager>:
+    Login:
+    Signup:
+    Profile:
+    ChangePass:
+    EditProfile:
+
+<Login>:
+    name: "login_screen"
+    GridLayout:
+        cols: 1
+        rows: 6
+        id: screen
+        height: Window.height - toolbar.height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        size_hint: (0.6, 0.7)
+        Image:
+            source: "imgs/register.png"
+        MDTextField:
+            id: username_input
+            hint_text: "Username"
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: f"Field is required and <= {self.max_text_length} chars"
+            max_text_length: 25
+        MDTextField:
+            id: password_input
+            hint_text: "Password"
+            required: True
+            password: True
+            helper_text_mode: "on_error"
+            helper_text: f"Field is required and <= {self.max_text_length} chars"
+            max_text_length: 25
+        MDFillRoundFlatButton:
+            text: 'Log In'
+            size_hint_x: 1
+            on_press:
+                app.root.current = "profile_screen" if root.login(username_input.text, password_input.text) else "login_screen"
+                root.manager.transition.direction = "left"
+        MDLabel:
+            text: "Don't have an account?"
+            halign: "center"
+            size_hint_y: 0.2
+        MDFillRoundFlatButton:
+            text: 'Sign Up'
+            size_hint_x: 1
+            on_press:
+                app.root.current = "signup_screen"
+                root.manager.transition = FadeTransition(clearcolor=(0,0,0,0))
+    
+    MDTextButton:
+        text: "M074MED@2022"
+        pos_hint: {"center_x": 0.5, "center_y": 0.05}
+        on_press:
+            app.portfolio()
+    MDBanner:
+        id: banner
+        text: [""]
+        # The widget that is under the banner.
+        # It will be shifted down to the height of the banner.
+        over_widget: screen
+        vertical_pad: toolbar.height
+    MDToolbar:
+        id: toolbar
+        elevation: 10
+        pos_hint: {'top': 1}
+        canvas:
+            Rectangle:
+                source: 'imgs/logo.png'
+                pos: (60,self.pos[1])
+                size: (300, self.size[1]-5)
+
+<Signup>:
+    name: "signup_screen"
+    BoxLayout:
+        id: screen
+        orientation:'vertical'
+        padding: (0, toolbar.height, 0, 0)
+        height: Window.height - toolbar.height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        size_hint_x: 0.9
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            BoxLayout:
+                orientation:'vertical'
+                size_hint_y: 1.5
+                padding: (0, 30, 0, 0)
+                Image:
+                    source: "imgs/register.png"
+                MDTextField:
+                    id: username_input
+                    hint_text: "Username"
+                    required: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 25
+                MDTextField:
+                    id: fname_input
+                    hint_text: "First Name"
+                    required: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 30
+                MDTextField:
+                    id: lname_input
+                    hint_text: "Last Name"
+                    required: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 30
+                MDTextField:
+                    id: email_input
+                    hint_text: "Email"
+                    required: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 100
+                MDTextField:
+                    id: password1_input
+                    hint_text: "Password"
+                    required: True
+                    password: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 25
+                MDTextField:
+                    id: password2_input
+                    hint_text: "Confirm Password"
+                    required: True
+                    password: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 25
+                MDFillRoundFlatButton:
+                    text: 'Sign Up'
+                    size_hint_x: 1
+                    on_press:
+                        app.root.current = "profile_screen" if root.signup(username_input.text, fname_input.text, lname_input.text, email_input.text, password1_input.text, password2_input.text) else "signup_screen"
+                        root.manager.transition.direction = "left"
+                MDLabel:
+                    text: "Already have an account?"
+                    halign: "center"
+                    size_hint_y: 0.3
+                MDFillRoundFlatButton:
+                    text: 'Log In'
+                    size_hint_x: 1
+                    on_press:
+                        app.root.current = "login_screen"
+                        root.manager.transition = FadeTransition(clearcolor=(0,0,0,0))
+                BoxLayout:
+                    orientation:'vertical'
+                    size_hint_y: 0.7
+                    padding: (0, 0, 0, 30)
+                    MDTextButton:
+                        text: "M074MED@2022"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.05}
+                        on_press:
+                            app.portfolio()
+    MDBanner:
+        id: banner
+        text: [""]
+        # The widget that is under the banner.
+        # It will be shifted down to the height of the banner.
+        over_widget: screen
+        vertical_pad: toolbar.height
+    MDToolbar:
+        id: toolbar
+        elevation: 10
+        pos_hint: {'top': 1}
+        canvas:
+            Rectangle:
+                source: 'imgs/logo.png'
+                pos: (60,self.pos[1])
+                size: (300, self.size[1]-5)
+
+<Profile>:
+    name: "profile_screen"
+    MDNavigationLayout:
+        ScreenManager:
+            Screen:
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        id: toolbar
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        canvas:
+                            Rectangle:
+                                source: 'imgs/logo.png'
+                                pos: (140,self.pos[1])
+                                size: (300, self.size[1]-5)
+                    BoxLayout:
+                        id: screen
+                        orientation:'vertical'
+                        pos_hint: {"center_x": 0.5}
+                        size_hint_x: 0.9
+                        ScrollView:
+                            do_scroll_x: False
+                            do_scroll_y: True
+                            GridLayout:
+                                cols: 1
+                                size_hint_y: 2
+                                padding: (0, 30, 0, 0)
+                                AsyncImage:
+                                    id: image
+                                    source: "imgs/profile.png"
+                                GridLayout:
+                                    cols:2
+                                    padding: (0, 20, 0, 0)
+                                    size_hint_y: 0.3
+                                    MDLabel:
+                                        text:'Username: '
+                                        bold: True
+                                    MDLabel:
+                                        id: username_label
+                                        text: ""
+                                GridLayout:
+                                    cols:2
+                                    rows:1
+                                    size_hint_y: 0.3
+                                    MDLabel:
+                                        text:'Full Name: '
+                                        bold: True
+                                    MDLabel:
+                                        id: name_label
+                                        text: ""
+                                GridLayout:
+                                    cols:2
+                                    rows:1
+                                    size_hint_y: 0.3
+                                    MDLabel:
+                                        text:'Email: '
+                                        bold: True
+                                    MDLabel:
+                                        id: email_label
+                                        text: ""
+                                GridLayout:
+                                    cols:2
+                                    rows:1
+                                    size_hint_y: 0.3
+                                    MDLabel:
+                                        text:'Phone Number: '
+                                        bold: True
+                                    MDLabel:
+                                        id: phone_label
+                                        text: ""
+                                GridLayout:
+                                    cols:2
+                                    rows:1
+                                    size_hint_y: 0.3
+                                    MDLabel:
+                                        text:'Password: '
+                                        bold: True
+                                    MDFillRoundFlatButton:
+                                        id: change_pass_btn
+                                        text: "Change Password"
+                                        size_hint_y: 1
+                                        on_press:
+                                            app.root.current = "change_password_screen"
+                                            root.manager.transition.direction = "left"
+                                GridLayout:
+                                    cols:2
+                                    rows:1
+                                    size_hint_y: 0.3
+                                    MDLabel:
+                                        text:'City: '
+                                        bold: True
+                                    MDLabel:
+                                        id: city_label
+                                        text: ""
+                                GridLayout:
+                                    cols:2
+                                    rows:1
+                                    size_hint_y: 0.3
+                                    padding: (0, 0, 0, 20)
+                                    MDLabel:
+                                        text:'Token: '
+                                        bold: True
+                                    MDLabel:
+                                        id: token_label
+                                        text: ""
+                                MDFillRoundFlatButton:
+                                    id: edit_profile_btn
+                                    text: "Edit Profile"
+                                    size_hint_x: 1
+                                    on_press:
+                                        root.default_val(token_label.text)
+                                        app.root.current = "edit_profile_screen" if root.default_val(token_label.text) else "profile_screen"
+                                        root.manager.transition.direction = "left"
+                                BoxLayout:
+                                    orientation:'vertical'
+                                    pos_hint: {"center_x": 0.5}
+                                    padding: (0, 80, 0, 0)
+                                    size_hint_y: 0.5
+                                    MDLabel:
+                                        text: "Go to the Website to aplay for jobs: "
+                                        halign: "center"
+                                        pos_hint: {"center_y": 0.5}
+                                    MDTextButton:
+                                        text: "https://jobboard.pythonanywhere.com"
+                                        color: (21/255 ,137/255 ,241/255 , 1)
+                                        pos_hint: {"center_x": 0.5, "center_y": 0.4}
+                                        on_press:
+                                            root.open_web()
+                                BoxLayout:
+                                    orientation:'vertical'
+                                    size_hint_y: 0.7
+                                    padding: (0, 0, 0, 30)
+                                    MDTextButton:
+                                        text: "M074MED@2022"
+                                        pos_hint: {"center_x": 0.5, "center_y": 0.05}
+                                        on_press:
+                                            app.portfolio()
+                MDBanner:
+                    id: banner
+                    text: [""]
+                    # The widget that is under the banner.
+                    # It will be shifted down to the height of the banner.
+                    over_widget: screen
+                    vertical_pad: toolbar.height
+        MDNavigationDrawer:
+            id: nav_drawer
+            orientation: "vertical"
+            padding: "8dp"
+            spacing: "8dp"
+            AnchorLayout:
+                anchor_x: "left"
+                size_hint_y: None
+                height: avatar.height
+            
+                AsyncImage:
+                    id: avatar
+                    size_hint: None, None
+                    size: "300dp", "300dp"
+                    source: image.source
+        
+            MDLabel:
+                text: username_label.text
+                font_style: "Button"
+                size_hint_y: None
+                height: self.texture_size[1]
+        
+            MDLabel:
+                text: email_label.text
+                font_style: "Caption"
+                size_hint_y: None
+                height: self.texture_size[1]
+            ScrollView:
+                MDList:
+                    OneLineAvatarListItem:
+                        text: "Profile"
+                        on_press:
+                            nav_drawer.set_state("close")
+                        IconLeftWidget:
+                            icon: "account"
+                            on_press:
+                                nav_drawer.set_state("close")
+                    OneLineAvatarListItem:
+                        text: "Edit Profile"
+                        on_press:
+                            edit_profile_btn.trigger_action()
+                            nav_drawer.set_state("close")
+                        IconLeftWidget:
+                            icon: "account-edit"
+                            on_press:
+                                edit_profile_btn.trigger_action()
+                                nav_drawer.set_state("close")
+                    OneLineAvatarListItem:
+                        text: "Change Password"
+                        on_press:
+                            change_pass_btn.trigger_action()
+                            nav_drawer.set_state("close")
+                        IconLeftWidget:
+                            icon: "form-textbox-password"
+                            on_press:
+                                change_pass_btn.trigger_action()
+                                nav_drawer.set_state("close")
+                    OneLineAvatarListItem:
+                        text: "Dark Mode"
+                        on_press:
+                            dark_mode.trigger_action()
+                            dark_mode.active = False if dark_mode.active else True
+                        MDSwitch:
+                            id: dark_mode
+                            pos_hint: {'center_x': 0.9, 'center_y': .5}
+                            on_active:
+                                app.theme_cls.theme_style = "Dark" if dark_mode.active else "Light"
+                        IconLeftWidget:
+                            icon: "theme-light-dark"
+                            on_press:
+                                dark_mode.active = False if dark_mode.active else True
+                    OneLineAvatarListItem:
+                        text: "Log out"
+                        on_press:
+                            app.root.current = "login_screen"
+                            root.manager.transition.direction = "right"
+                            nav_drawer.set_state("close")
+                        IconLeftWidget:
+                            icon: "logout"
+                            on_press:
+                                app.root.current = "login_screen"
+                                root.manager.transition.direction = "right"
+
+<ChangePass>:
+    name: "change_password_screen"
+    GridLayout:
+        cols: 1
+        rows: 7
+        id: screen
+        height: Window.height - toolbar.height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        size_hint: (0.9, 0.8)
+        Image:
+            source: "imgs/change_pass.png"
+        MDTextField:
+            id: oldpass_input
+            hint_text: "Old Password"
+            required: True
+            password: True
+            helper_text_mode: "on_error"
+            helper_text: f"This field is required and <= {self.max_text_length} chars"
+            max_text_length: 25
+        MDTextField:
+            id: newpass_input
+            hint_text: "New password"
+            required: True
+            password: True
+            helper_text_mode: "on_error"
+            helper_text: f"This field is required and <= {self.max_text_length} chars"
+            max_text_length: 25
+        MDTextField:
+            id: newpasscon_input
+            hint_text: "New password confirmation"
+            required: True
+            password: True
+            helper_text_mode: "on_error"
+            helper_text: f"This field is required and <= {self.max_text_length} chars"
+            max_text_length: 25
+        MDFillRoundFlatButton:
+            text: 'Change Password'
+            size_hint_x: 1
+            on_press:
+                app.root.current = "profile_screen" if root.change_pass(oldpass_input.text, newpass_input.text, newpasscon_input.text) else "change_password_screen"
+                root.manager.transition.direction = "right"
+        MDLabel:
+            size_hint_y: 0.1
+        MDFillRoundFlatButton:
+            text: 'Back'
+            size_hint_x: 1
+            on_press:
+                app.root.current = "profile_screen"
+                root.manager.transition.direction = "right"
+    MDTextButton:
+        text: "M074MED@2022"
+        pos_hint: {"center_x": 0.5, "center_y": 0.05}
+        on_press:
+            app.portfolio()
+    MDBanner:
+        id: banner
+        text: [""]
+        # The widget that is under the banner.
+        # It will be shifted down to the height of the banner.
+        over_widget: screen
+        vertical_pad: toolbar.height
+    MDToolbar:
+        id: toolbar
+        elevation: 10
+        pos_hint: {'top': 1}
+        canvas:
+            Rectangle:
+                source: 'imgs/logo.png'
+                pos: (60,self.pos[1])
+                size: (300, self.size[1]-5)
+
+<EditProfile>:
+    name: "edit_profile_screen"
+    BoxLayout:
+        id: screen
+        orientation:'vertical'
+        padding: (0, toolbar.height, 0, 0)
+        height: Window.height - toolbar.height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        size_hint_x: 0.9
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            GridLayout:
+                cols: 1
+                size_hint_y: 1.5
+                padding: (0, 30, 0, 0)
+                MDFlatButton:
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    height: image.height
+                    size_hint: (0.5, 1)
+                    width: image.width
+                    on_press:
+                        root.open_file_manager()
+                    AsyncImage:
+                        id: image
+                        source: "imgs/profile.png"
+                MDLabel:
+                    size_hint_y: 0.2
+                MDTextField:
+                    id: username_input
+                    hint_text: "Username"
+                    required: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 25
+                MDTextField:
+                    id: fname_input
+                    hint_text: "First Name"
+                    required: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 30
+                MDTextField:
+                    id: lname_input
+                    hint_text: "Last Name"
+                    required: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 30
+                MDTextField:
+                    id: email_input
+                    hint_text: "Email"
+                    required: True
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field is required and <= {self.max_text_length} chars"
+                    max_text_length: 100
+                MDTextField:
+                    id: phone_input
+                    text: ""
+                    hint_text: "Phone Number"
+                    max_text_length: 20
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field must be less than {self.max_text_length} characters"
+                MDTextField:
+                    id: city_input
+                    text: ""
+                    hint_text: "City"
+                    max_text_length: 25
+                    helper_text_mode: "on_error"
+                    helper_text: f"This field must be less than {self.max_text_length} characters"
+                MDFillRoundFlatButton:
+                    text: 'Save'
+                    size_hint_x: 1
+                    on_press:
+                        app.root.current = "profile_screen" if root.edit_profile(username_input.text, fname_input.text, lname_input.text, email_input.text, phone_input.text, city_input.text, image.source) else "edit_profile_screen"
+                        root.manager.transition.direction = "right"
+                MDLabel:
+                    size_hint_y: 0.1
+                MDFillRoundFlatButton:
+                    text: 'Back'
+                    size_hint_x: 1
+                    on_press:
+                        app.root.current = "profile_screen"
+                        root.manager.transition.direction = "right"
+                BoxLayout:
+                    orientation:'vertical'
+                    size_hint_y: 0.7
+                    padding: (0, 0, 0, 30)
+                    MDTextButton:
+                        text: "M074MED@2022"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.05}
+                        on_press:
+                            app.portfolio()
+    MDBanner:
+        id: banner
+        text: [""]
+        # The widget that is under the banner.
+        # It will be shifted down to the height of the banner.
+        over_widget: screen
+        vertical_pad: toolbar.height
+    MDToolbar:
+        id: toolbar
+        elevation: 10
+        pos_hint: {'top': 1}
+        canvas:
+            Rectangle:
+                source: 'imgs/logo.png'
+                pos: (60,self.pos[1])
+                size: (300, self.size[1]-5)
